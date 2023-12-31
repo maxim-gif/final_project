@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 
 export const Header = styled.div`
-    width: 100vw;
+    width: 100%;
     height: 79px;
     background-color: #009EE4;
     display: flex;
@@ -21,10 +21,13 @@ export const ButtonHeader = styled.button`
     color: white;
     font-size: 16px;
     font-weight: 400;
+    &:hover {
+        background-color: #0080C1;
+    }
 `;
 
 export const SearchMain = styled.div`
-    width: 100vw;
+    width: 100%;
     height: 136px;
     display: flex;
     justify-content: center;
@@ -63,6 +66,9 @@ export const SearchHeader = styled.button`
     color: white;
     font-size: 16px;
     font-weight: 400;
+    &:hover {
+        background-color: #0080C1;
+    }
 `;
 
 export const TitleMain = styled.h1`
