@@ -44,7 +44,6 @@ body {
   color: #ffffff;
   min-height: 100vh;
 	width: 100%;
-  background: #271A58;
   
 
 }
