@@ -1,18 +1,12 @@
 import * as S from './profile.style';
 import { CardProduct } from "../../components/cardProduct/cardProduct";
+import { ProfileHeader } from "../../components/profileHeader/profileHeader";
 
 export const Profile = () => {
 
 	return (
         <>
-        <S.Header>
-            <S.ButtonHeader>Разместить объявление</S.ButtonHeader>
-            <S.ButtonHeader2>Личный кабинет</S.ButtonHeader2>
-        </S.Header>
-        <S.ProfileNav>
-            <S.LogoProfile src="/img/LogoMain.svg"></S.LogoProfile>
-            <S.ButtonBack>Вернуться на главную</S.ButtonBack>
-        </S.ProfileNav>
+        <ProfileHeader/>
         <S.ProfileWelcome>Здравствуйте, Антон!</S.ProfileWelcome>
         <S.SectionName>Настройки профиля</S.SectionName>
         <S.Profile>

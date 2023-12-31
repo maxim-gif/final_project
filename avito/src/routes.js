@@ -4,6 +4,7 @@ import { Auth } from "./pages/auth/auth";
 import { Main } from "./pages/main/main";
 import { Reg } from "./pages/reg/reg";
 import { Profile } from "./pages/profile/profile";
+import { ProfileSeller } from "./pages/profileSeller/profileSeller";
 
 export const AppRoutes = () => {
   
@@ -15,6 +16,7 @@ export const AppRoutes = () => {
         <Route path="/" element={<Main />} />
         <Route path="/reg" element={<Reg />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profileSeller" element={<ProfileSeller />} />
 
       </Routes>
     </BrowserRouter>
