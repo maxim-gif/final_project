@@ -1,6 +1,7 @@
 import * as S from './profileSeller.style';
 import { CardProduct } from "../../components/cardProduct/cardProduct";
 import { ProfileHeader } from "../../components/profileHeader/profileHeader";
+import { ShowTelButton } from "../../components/showTelButton/showTelButton";
 
 export const ProfileSeller = () => {
 
@@ -14,10 +15,7 @@ export const ProfileSeller = () => {
                 <S.SellerName>Кирилл Матвеев</S.SellerName>
                 <S.SellerCity>Санкт-Петербург</S.SellerCity>
                 <S.SellerInfo>Продает товары с августа 2021</S.SellerInfo>
-                <S.SellerButton>
-                    <S.TittleButton>Показать телефон </S.TittleButton>
-                    <S.TelButton>8 905 ХХХ ХХ ХХ</S.TelButton>
-                </S.SellerButton>   
+                <ShowTelButton/>
                 </S.ProfileData>
         </S.Seller>
         <S.SectionName>Мои товары</S.SectionName>
