@@ -48,5 +48,9 @@ body {
 
 }
 
-
+input, textarea {
+  &:focus {
+    outline: none;
+}
+}
 `;

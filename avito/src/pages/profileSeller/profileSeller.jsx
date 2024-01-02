@@ -2,11 +2,14 @@ import * as S from './profileSeller.style';
 import { CardProduct } from "../../components/cardProduct/cardProduct";
 import { ProfileHeader } from "../../components/profileHeader/profileHeader";
 import { ShowTelButton } from "../../components/showTelButton/showTelButton";
+import { ModalReviews } from "../../components/modalReviews/modalReviews";
 
 export const ProfileSeller = () => {
 
+
 	return (
         <>
+        <ModalReviews/>
         <ProfileHeader/>
         <S.Tittle>Профиль продавца</S.Tittle>
         <S.Seller>
