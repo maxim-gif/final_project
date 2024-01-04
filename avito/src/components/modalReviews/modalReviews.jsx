@@ -3,9 +3,12 @@ export const ModalReviews = () => {
 
 	return (
         <S.Modal>
-            <S.Tittle>Новое объявление</S.Tittle>
-            <S.NameSection>Название</S.NameSection>
-            <S.InputName placeholder='Введите название'></S.InputName>
+            <S.Top>
+                <S.Tittle>Отзывы о товаре</S.Tittle>
+                <S.ButtonClose src="/img/close.svg"></S.ButtonClose>
+            </S.Top>
+            <S.NameSection>Добавить отзыв</S.NameSection>
+            <S.InputName placeholder='Введите отзыв'></S.InputName>
             <S.ButtonModal>Опубликовать</S.ButtonModal>
             <S.Review>
                 <S.ReviewsImage></S.ReviewsImage>

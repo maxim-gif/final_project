@@ -6,7 +6,22 @@ export const Modal = styled.div`
     display: flex;
     flex-direction: column;
     border-radius: 12px;
-    padding: 20px 50px 0 50px;
+    padding: 20px 98px 0 50px;
+`;
+
+export const Top = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+    width: 100%;
+`;
+
+export const ButtonClose = styled.img`
+    width: 30px;
+    height: 30px;
+    &:hover {
+        content: url('/img/close-hover.svg');
+    }
 `;
 
 export const Tittle = styled.h1`

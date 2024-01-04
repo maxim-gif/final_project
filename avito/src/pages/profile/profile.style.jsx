@@ -91,6 +91,7 @@
         height: 50px;
         border-radius: 6px;
         border: 1px solid rgba(0, 0, 0, 0.2);
+        padding-left: 15px;
         &:focus{
             outline: 1px solid rgba(0, 158, 228, 1);
         }
@@ -102,4 +103,17 @@
         column-gap: 26px;
         row-gap: 40px;
         margin-left: calc(50vw - 579px);
+`;
+
+export const SaveButton = styled.button`
+width: 154px;
+height: 50px;
+border-radius: 6px;
+background: ${({ $active }) => ($active ? '#009EE4' : '#D9D9D9')};
+border: none;
+margin-top: 10px;
+font-size: 16px;
+font-weight: 400;
+line-height: 24px;
+color: white;
 `;

@@ -24,7 +24,6 @@ export const Tittle = styled.h1`
 `;
 
 export const ButtonClose = styled.img`
-    
     width: 30px;
     height: 30px;
     &:hover {

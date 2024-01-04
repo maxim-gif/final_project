@@ -18,6 +18,7 @@ export const CardName = styled.h1`
     font-size: 22px;
     font-weight: 500;
     color: rgba(0, 158, 228, 1);
+    overflow: hidden;
 `;
 
 export const CardPrice = styled.h2`

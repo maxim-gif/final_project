@@ -46,11 +46,11 @@ export const Search = styled.input`
     margin-left: 60px;
     margin-right: 10px;
     border: 1px solid rgba(0, 0, 0, 0.2);
+    padding-left: 20px;
     &::placeholder {
         color: rgba(0, 0, 0, 0.3);
         font-size: 16px;
         font-weight: 400;
-        padding-left: 20px;
     }
     &:focus {
         outline: none;

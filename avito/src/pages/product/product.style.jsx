@@ -94,6 +94,9 @@ font-size: 20px;
 font-weight: 600;
 line-height: 26px;
 color: #009EE4;
+&:hover{
+    cursor: pointer;
+}
 `;
 
 export const DateSale = styled.div`
