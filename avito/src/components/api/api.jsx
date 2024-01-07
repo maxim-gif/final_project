@@ -125,7 +125,7 @@ export async function updateUser (name, surname, city, phone) {
 }
 
 export const createAdvert = async(name, description, price) => {
-    console.log(name, description, price);
+
     if (!tokenUpdateNew) {
         await refreshToken()
      }

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { ProfileHeader } from "../../components/profileHeader/profileHeader";
 import { ShowTelButton } from "../../components/showTelButton/showTelButton";
 import { formatToDate, formatDate } from "../../utilits/dateFormate";
-import {baseUrl, deleteAdvert} from '../../components/api/api'
+import {baseUrl, deleteAdvert,} from '../../components/api/api'
 import { AddAdvert } from '../../components/addAdvert/addAdvert'
 import { EditAdvert } from '../../components/editAdvert/editAdvert'
 
@@ -48,11 +48,6 @@ export const Product = () => {
             setImagesHtml(result);
         }
     }, [products, id])
-
-    // setTimeout(() => {
-    //     deleteImage(baseUrl + dataAdvert[0].images[0].url, dataAdvert[0].id)
-    // }, 3000);
-    
 
 	return dataAdvert.length > 0 ?(
         <>

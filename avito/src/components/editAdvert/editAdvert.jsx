@@ -26,9 +26,6 @@ export const EditAdvert = ({switchModal, editModal,  dataAdvert}) => {
         name !== dataAdvert.title || description !== dataAdvert.description || price !== dataAdvert.price || images.length !== 0 || forDelete.length !== 0? setActiveButton(true): setActiveButton(false)
     }, [name, description, price, images, forDelete])
 
-    useEffect(() => {
-      console.log(forDelete);
-    }, [forDelete])
 
     const handleAddAdvert = () => {
         editAdvert(name, description, price, dataAdvert.id).then((data) => {
@@ -106,7 +103,7 @@ export const EditAdvert = ({switchModal, editModal,  dataAdvert}) => {
                     <S.SelectedImage src={baseUrl + imagesOld[i].url}></S.SelectedImage>
                     <S.DeleteButton onClick={(e) => handleDeleteImage(e,i)}>Удалить</S.DeleteButton>
                 </>
-                :<S.SelectedImage src={imagesUrl[i-imagesOld.length]}></S.SelectedImage>}
+                :<S.SelectedImage src={imagesUrl[i-imagesOld.length]?imagesUrl[i-imagesOld.length]:'/img/addImage.svg'}></S.SelectedImage>}
             </label>
         );
     }

@@ -58,7 +58,7 @@ export const ProfileSeller = () => {
                      <S.ProfileData>
                          <S.SellerName>{user.name}</S.SellerName>
                          <S.SellerCity>{user.city}</S.SellerCity>
-                         <S.SellerInfo>Продает товары {formatToDate(user.sells_from)}</S.SellerInfo>
+                         <S.SellerInfo>Продает товары {formatToDate(user.sells_from).toLowerCase()}</S.SellerInfo>
                          <ShowTelButton phone={user.phone}/>
                      </S.ProfileData>
                  </S.Seller>
