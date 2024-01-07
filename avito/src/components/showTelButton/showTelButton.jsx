@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import * as S from './showTelButton.style';
 
 export const ShowTelButton = ({ phone }) => {
-    console.log(phone);
     const [active, setActive] = useState(false);
 
     return (

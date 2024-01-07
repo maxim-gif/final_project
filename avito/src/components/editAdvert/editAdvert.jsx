@@ -1,38 +1,35 @@
-import * as S from './addAdvert.style';
+import * as S from './editAdvert.style';
 import PropTypes from 'prop-types';
 import React from 'react';
 const {  useState, useEffect } = React
-import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getProducts } from "../api/api";
 import { setProducts } from "../../store/slices/avito";
-import {createAdvert, addImage, } from '../../components/api/api'
+import {editAdvert, addImage, baseUrl } from '../../components/api/api'
 
 
-export const AddAdvert = ({switchModal, addModal, handleMyAdvert}) => {
- 
+export const EditAdvert = ({switchModal, editModal,  dataAdvert}) => {
+
     const dispatch = useDispatch();
-    const location = useLocation();
  
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
+    const [name, setName] = useState(dataAdvert.title);
+    const [description, setDescription] = useState(dataAdvert.description);
+    const [price, setPrice] = useState(dataAdvert.price);
     const [activeButton, setActiveButton] = useState(false);
     const [images, setImages] = useState([]);
     const [imagesUrl, setImagesUrl] = useState([]);
-
+    const imagesOld = dataAdvert.images
     useEffect(() => {
-        name !== '' && description !== '' && price !== '' ? setActiveButton(true): setActiveButton(false)
-    }, [name, description, price])
+        name !== dataAdvert.title || description !== dataAdvert.description || price !== dataAdvert.price || images.length !== 0 ? setActiveButton(true): setActiveButton(false)
+    }, [name, description, price, images])
 
     const handleAddAdvert = () => {
-        createAdvert(name, description, price).then((data) => {
+        editAdvert(name, description, price, dataAdvert.id).then((data) => {
             if (images.length > 0) {
                 for (let index = 0; index < images.length; index++) {
                     addImage(data.id, images[index]).then(() =>{
                         if (index === images.length - 1) {
                             switchModal(false)
-                            location.pathname === '/profile'?handleMyAdvert():null
                             getProducts().then(data => {
                                 dispatch(setProducts(data))
                             });
@@ -41,12 +38,12 @@ export const AddAdvert = ({switchModal, addModal, handleMyAdvert}) => {
                 }
             } else {
                 switchModal(false)
-                location.pathname === '/profile'?handleMyAdvert():null
                 getProducts().then(data => {
                     dispatch(setProducts(data))
                 });
             }
 
+            console.log(data.id);
         })
     }
 
@@ -69,23 +66,21 @@ export const AddAdvert = ({switchModal, addModal, handleMyAdvert}) => {
                     onChange={handleImageChange}
                     accept="image/*">
                 </S.Image>
-                <S.SelectedImage src={imagesUrl[i]}></S.SelectedImage>
+                {i < imagesOld.length
+                ?<S.SelectedImage src={baseUrl + imagesOld[i].url}></S.SelectedImage>
+                :<S.SelectedImage src={imagesUrl[i-imagesOld.length]}></S.SelectedImage>}
             </label>
         );
     }
+    
 
 	return (
-        <S.Page $activeModal={addModal}>
+        <S.Page $activeModal={editModal}>
             <S.Modal>
                 <S.Top>
-                    <S.Tittle>Новое объявление</S.Tittle>
+                    <S.Tittle>Редактировать объявление</S.Tittle>
                     <S.ButtonClose src="/img/close.svg"  onClick={() => {
                         switchModal(false)
-                        setName('')
-                        setDescription('')
-                        setPrice('')
-                        setImages([])
-                        setImagesUrl([])
                         }}></S.ButtonClose>
                 </S.Top>
                 <S.NameSection>Название</S.NameSection>
@@ -106,8 +101,8 @@ export const AddAdvert = ({switchModal, addModal, handleMyAdvert}) => {
     )
 	
 }
-AddAdvert.propTypes = {
+EditAdvert.propTypes = {
     switchModal: PropTypes.func.isRequired,
-    addModal: PropTypes.bool.isRequired,
-    handleMyAdvert: PropTypes.func,
+    editModal: PropTypes.bool.isRequired,
+    dataAdvert: PropTypes.object.isRequired,
 };

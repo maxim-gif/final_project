@@ -124,3 +124,24 @@ export const Description = styled.div`
         color: #000000;
     }
 `;
+
+export const Buttons = styled.div`
+
+`;
+
+export const ButtonEdit = styled.button`
+width: 189px;
+height: 50px;
+border-radius: 6px;
+background: #009EE4;
+font-size: 16px;
+font-weight: 400;
+line-height: 24px;
+color: white;
+border: none;
+`;
+
+export const ButtonDelete = styled(ButtonEdit)`
+width: 225px;
+margin-left: 10px;
+`;

@@ -2,7 +2,7 @@ import * as S from './auth.style';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 const { useState } = React
-import {authorization} from '../../components/api/api'
+import {authorization, getMyData} from '../../components/api/api'
 
 export const Auth = () => {
 
@@ -17,8 +17,12 @@ export const Auth = () => {
             if (data.access_token) {
                 localStorage.setItem('token', data.access_token)
                 localStorage.setItem('refToken', data.refresh_token)
-                navigate(`/`)
             }
+            getMyData().then((data) => {
+                console.log(data);
+                localStorage.setItem('userId', data.id)
+                navigate(`/`)
+            })
         })
  
     }

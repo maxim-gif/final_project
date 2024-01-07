@@ -1,6 +1,10 @@
     import styled from 'styled-components';
 
-
+    export const Page = styled.div`
+    position: relative ;
+    min-height: 100vh;
+    padding-bottom: 20px;
+`;
 
     export const ProfileWelcome = styled.h1`
         margin-left: calc(50vw - 579px);
@@ -32,6 +36,12 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        & > label{
+            padding-top: 10px;
+            color: #009EE4;
+            font-size: 16px;
+            font-weight: 400;
+        }
     `;
 
     export const Photo = styled.img`
@@ -41,14 +51,7 @@
         border-radius: 50%;
     `;
 
-    export const ChangePhoto = styled.button`
-        width: 74px;
-        border: none;
-        background: transparent;
-        margin-top: 10px;
-        color: #009EE4;
-        font-size: 16px;
-        font-weight: 400;
+    export const ChangePhoto = styled.input`
     `;
 
     export const ProfileData = styled.div`
@@ -117,3 +120,4 @@ font-weight: 400;
 line-height: 24px;
 color: white;
 `;
+

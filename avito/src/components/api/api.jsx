@@ -33,6 +33,7 @@ export const authorization = async (email, password ) => {
             password: password,
         }),
     })
+    console.log(response);
     const data = await response.json()
     return data
 }
@@ -43,11 +44,10 @@ export const refreshToken = async () => {
     tokenUpdateNew = true
     const t = setTimeout(() => {
         tokenUpdateNew = false
-        close(t)
+        clearTimeout(t)
     }, 30000);
  
-    console.log(localStorage.getItem('token'));
-    console.log(localStorage.getItem('refToken'));
+
 
     const response = await fetch(`${baseUrl}auth/login`, {
     method: 'PUT',
@@ -61,11 +61,8 @@ export const refreshToken = async () => {
     })
     if (response.status === 201) {
         const data = await response.json()
-        console.log(data);
         localStorage.setItem('token', data.access_token)
         localStorage.setItem('refToken', data.refresh_token)
-        console.log(localStorage.getItem('token'));
-        console.log(localStorage.getItem('refToken'));
         return data
     }
     if (response.status === 401) {
@@ -76,7 +73,6 @@ export const refreshToken = async () => {
 }
 
 export const getMyAdverts = async() => {
-    console.log("getMyAdverts");
     if (!tokenUpdateNew) {
        await refreshToken()
     }
@@ -124,6 +120,131 @@ export async function updateUser (name, surname, city, phone) {
           }),
     })
     
+    const data = await response.json()
+    return data
+}
+
+export const createAdvert = async(name, description, price) => {
+    console.log(name, description, price);
+    if (!tokenUpdateNew) {
+        await refreshToken()
+     }
+    const response = await fetch(`${baseUrl}adstext`,{
+        method: 'POST',
+        headers: {
+            "content-type": "application/json",
+            'authorization': `Bearer ${localStorage.getItem('refToken')}`,
+        },
+        body: JSON.stringify({
+            "title": name,
+            "description": description,
+            "price": price,
+          }),
+    })
+    
+    const data = await response.json()
+    return data
+}
+
+export const editAdvert = async(name, description, price, id) => {
+    console.log(name, description, price);
+    if (!tokenUpdateNew) {
+        await refreshToken()
+     }
+    const response = await fetch(`${baseUrl}ads/${id}`,{
+        method: 'PATCH',
+        headers: {
+            "content-type": "application/json",
+            'authorization': `Bearer ${localStorage.getItem('refToken')}`,
+        },
+        body: JSON.stringify({
+            "title": name,
+            "description": description,
+            "price": price,
+          }),
+    })
+    
+    const data = await response.json()
+    return data
+}
+
+export const deleteAdvert = async(id) => {
+ 
+    if (!tokenUpdateNew) {
+        await refreshToken()
+     }
+    const response = await fetch(`${baseUrl}ads/` + id,{
+        method: 'DELETE',
+        headers: {
+            'authorization': `Bearer ${localStorage.getItem('refToken')}`,
+        },
+    })
+    
+    const data = await response.json()
+    return data
+}
+
+export const deleteImage = async(url, id) => {
+
+    if (!tokenUpdateNew) {
+        await refreshToken()
+     }
+    const response = await fetch(`${baseUrl}ads/${id}/image`,{
+        method: 'DELETE',
+        headers: {
+            'authorization': `Bearer ${localStorage.getItem('refToken')}`,
+        },
+        body: JSON.stringify({
+            "file_url": url,
+          }),
+    })
+    
+    const data = await response.json()
+    return data
+}
+
+export const addImage = async(id, image) => {
+
+    if (!tokenUpdateNew) {
+        await refreshToken()
+     }
+
+    const formData = new FormData();
+
+        formData.append('file', image);
+  
+    const response = await fetch(`${baseUrl}ads/${id}/image`,{
+        method: 'POST',
+        headers: {
+            'authorization': `Bearer ${localStorage.getItem('refToken')}`,
+        },
+        body: formData,
+    })
+    if (response.status === 201) {
+        const data = await response.json()
+        return data
+    }
+
+}
+
+export const addAvatar = async(image) => {
+   
+    if (!tokenUpdateNew) {
+        await refreshToken()
+     }
+
+    const formData = new FormData();
+   
+    formData.append('file', image);
+      
+    const response = await fetch(`${baseUrl}user/avatar`,{
+        method: 'POST',
+        headers: {
+            'authorization': `Bearer ${localStorage.getItem('refToken')}`,
+        },
+        body: formData,
+    })
+
     const data = await response.json()
     return data
 }

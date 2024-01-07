@@ -6,8 +6,9 @@ import { useSelector } from 'react-redux';
 import { CardProduct } from "../../components/cardProduct/cardProduct";
 import { ProfileHeader } from "../../components/profileHeader/profileHeader";
 import { ShowTelButton } from "../../components/showTelButton/showTelButton";
-// import { ModalReviews } from "../../components/modalReviews/modalReviews";
+import { AddAdvert } from '../../components/addAdvert/addAdvert'
 import {baseUrl} from '../../components/api/api'
+import { formatToDate, } from "../../utilits/dateFormate";
 
 export const ProfileSeller = () => {
 
@@ -16,18 +17,19 @@ export const ProfileSeller = () => {
     const productsState = useSelector((state) => state.products.products);
 
     const [productsHtml, setProductsHtml] = useState(null)
-    const [phone, setPhone] = useState(null)
-    const [avatar, setAvatar] = useState(null)
+    const [user, setUser] = useState(null)
+
+    const [addModal, setAddModal] = useState(false);
+    
+    let filter = []
 
     useEffect(()=>{
-        let filter = productsState.filter((product) => (
+        filter = productsState.filter((product) => (
             product.user_id === Number(id)
         ))
-        console.log(filter);
 
         if (filter.length !== 0) {
-            setAvatar(filter[0].user.avatar)
-            setPhone(filter[0].user.phone);
+            setUser(filter[0].user)
         }
 
         let result = filter.map((product) => (
@@ -44,27 +46,29 @@ export const ProfileSeller = () => {
         setProductsHtml(result)
     },[productsState])
 
-
-    
-	return (
+    return (
         <>
-        {/* <ModalReviews/> */}
-        <ProfileHeader/>
-        <S.Tittle>Профиль продавца</S.Tittle>
-        <S.Seller>
-            <S.ProfilePhoto src={baseUrl + avatar}></S.ProfilePhoto>
-            <S.ProfileData>
-                <S.SellerName>Кирилл Матвеев</S.SellerName>
-                <S.SellerCity>Санкт-Петербург</S.SellerCity>
-                <S.SellerInfo>Продает товары с августа 2021</S.SellerInfo>
-                <ShowTelButton phone={phone}/>
-                </S.ProfileData>
-        </S.Seller>
-        <S.SectionName>Мои товары</S.SectionName>
-        <S.CardsBox>
-            {productsHtml}
-        </S.CardsBox>
-       </>
-    )
+         {user && ( 
+             <>
+                 <AddAdvert addModal={addModal} switchModal={setAddModal}/>
+                 <ProfileHeader switchModal={setAddModal}/>
+                 <S.Tittle>Профиль продавца</S.Tittle>
+                 <S.Seller>
+                     <S.ProfilePhoto src={baseUrl + user.avatar}></S.ProfilePhoto>
+                     <S.ProfileData>
+                         <S.SellerName>{user.name}</S.SellerName>
+                         <S.SellerCity>{user.city}</S.SellerCity>
+                         <S.SellerInfo>Продает товары {formatToDate(user.sells_from)}</S.SellerInfo>
+                         <ShowTelButton phone={user.phone}/>
+                     </S.ProfileData>
+                 </S.Seller>
+                 <S.SectionName>Мои товары</S.SectionName>
+                 <S.CardsBox>
+                     {productsHtml}
+                 </S.CardsBox>
+             </>
+         )}
+        </>
+     );
 	
 }
