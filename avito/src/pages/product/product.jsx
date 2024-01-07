@@ -26,6 +26,7 @@ export const Product = () => {
     const [editModal, setEditModal] = useState(false);
     const [switchMainImage, setSwitchMainImage] = useState(0);
  
+    
     let dataAdvert = products.filter((product) => (
         product.id === Number(id)
     ))
@@ -37,6 +38,7 @@ export const Product = () => {
     const handleEdit = () => {
         setEditModal(true)
     }
+
     
     useEffect(() => {
         if (dataAdvert.length > 0 && dataAdvert[0].images) {
@@ -47,7 +49,10 @@ export const Product = () => {
         }
     }, [products, id])
 
-    console.log(dataAdvert);
+    // setTimeout(() => {
+    //     deleteImage(baseUrl + dataAdvert[0].images[0].url, dataAdvert[0].id)
+    // }, 3000);
+    
 
 	return dataAdvert.length > 0 ?(
         <>

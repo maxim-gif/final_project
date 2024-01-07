@@ -102,7 +102,13 @@ export const DopImage = styled.div`
 `;
 
 export const Image = styled.input`
+`;
 
+export const DeleteButton = styled.button`
+width: 100%;
+background: none;
+border: none;
+color: #009EE4;
 `;
 
 export const SelectedImage = styled.img`

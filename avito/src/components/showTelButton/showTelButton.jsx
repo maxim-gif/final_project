@@ -26,5 +26,5 @@ export const ShowTelButton = ({ phone }) => {
 
 
 ShowTelButton.propTypes = {
-    phone: PropTypes.string.isRequired,
+    phone: PropTypes.string,
 };

@@ -5,23 +5,30 @@ const {  useState, useEffect } = React
 import { useDispatch } from 'react-redux';
 import { getProducts } from "../api/api";
 import { setProducts } from "../../store/slices/avito";
-import {editAdvert, addImage, baseUrl } from '../../components/api/api'
+import {editAdvert, addImage, baseUrl, deleteImage } from '../../components/api/api'
 
 
 export const EditAdvert = ({switchModal, editModal,  dataAdvert}) => {
 
     const dispatch = useDispatch();
- 
+
     const [name, setName] = useState(dataAdvert.title);
     const [description, setDescription] = useState(dataAdvert.description);
     const [price, setPrice] = useState(dataAdvert.price);
     const [activeButton, setActiveButton] = useState(false);
     const [images, setImages] = useState([]);
     const [imagesUrl, setImagesUrl] = useState([]);
-    const imagesOld = dataAdvert.images
+    const [imagesOld, setImagesOld] = useState(dataAdvert.images);
+    const [forDelete, setForDelete] = useState([]);
+
+
     useEffect(() => {
-        name !== dataAdvert.title || description !== dataAdvert.description || price !== dataAdvert.price || images.length !== 0 ? setActiveButton(true): setActiveButton(false)
-    }, [name, description, price, images])
+        name !== dataAdvert.title || description !== dataAdvert.description || price !== dataAdvert.price || images.length !== 0 || forDelete.length !== 0? setActiveButton(true): setActiveButton(false)
+    }, [name, description, price, images, forDelete])
+
+    useEffect(() => {
+      console.log(forDelete);
+    }, [forDelete])
 
     const handleAddAdvert = () => {
         editAdvert(name, description, price, dataAdvert.id).then((data) => {
@@ -32,6 +39,7 @@ export const EditAdvert = ({switchModal, editModal,  dataAdvert}) => {
                             switchModal(false)
                             getProducts().then(data => {
                                 dispatch(setProducts(data))
+                                window.location.reload();
                             });
                         }
                     })
@@ -56,6 +64,33 @@ export const EditAdvert = ({switchModal, editModal,  dataAdvert}) => {
         }
     }
 
+    const handleDeleteImage = (e,i) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const updatedImages = [...imagesOld];
+            updatedImages.splice(i, 1);
+            setImagesOld(updatedImages)
+            setForDelete([...forDelete, imagesOld[i].url])
+    }
+
+    const handleDeleteImageApi = () => {
+        if (forDelete.length > 0) {
+            for (let index = 0; index < forDelete.length; index++) {
+                deleteImage(forDelete[index], dataAdvert.id).then(() => {
+                    if (index === forDelete.length - 1) {
+                        switchModal(false)
+                        getProducts().then(data => {
+                            dispatch(setProducts(data))
+                            window.location.reload();
+                        });
+                    }
+                })
+            }
+
+        }
+
+    }
+
     const imagesBox = [];
     for(let i = 0; i < 5; i++) {
         imagesBox.push(
@@ -67,7 +102,10 @@ export const EditAdvert = ({switchModal, editModal,  dataAdvert}) => {
                     accept="image/*">
                 </S.Image>
                 {i < imagesOld.length
-                ?<S.SelectedImage src={baseUrl + imagesOld[i].url}></S.SelectedImage>
+                ?<>
+                    <S.SelectedImage src={baseUrl + imagesOld[i].url}></S.SelectedImage>
+                    <S.DeleteButton onClick={(e) => handleDeleteImage(e,i)}>Удалить</S.DeleteButton>
+                </>
                 :<S.SelectedImage src={imagesUrl[i-imagesOld.length]}></S.SelectedImage>}
             </label>
         );
@@ -81,6 +119,14 @@ export const EditAdvert = ({switchModal, editModal,  dataAdvert}) => {
                     <S.Tittle>Редактировать объявление</S.Tittle>
                     <S.ButtonClose src="/img/close.svg"  onClick={() => {
                         switchModal(false)
+                        setActiveButton(false)
+                        setImagesOld(dataAdvert.images)
+                        setName(dataAdvert.title)
+                        setDescription(dataAdvert.description)
+                        setPrice(dataAdvert.price)
+                        setForDelete([])
+                        setImagesUrl([])
+                        setImages([])
                         }}></S.ButtonClose>
                 </S.Top>
                 <S.NameSection>Название</S.NameSection>
@@ -95,7 +141,10 @@ export const EditAdvert = ({switchModal, editModal,  dataAdvert}) => {
                 <S.BoxInput>
                     <S.InputPrice type="number" value={price} onChange={e => setPrice(e.target.value)}></S.InputPrice>
                 </S.BoxInput>
-                <S.ButtonModal $activeButton={activeButton} onClick={() => handleAddAdvert()}>Опубликовать</S.ButtonModal>
+                <S.ButtonModal $activeButton={activeButton} onClick={() => {
+                    handleAddAdvert()
+                    handleDeleteImageApi()
+                    }}>Сохранить</S.ButtonModal>
             </S.Modal>
         </S.Page>
     )

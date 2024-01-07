@@ -185,18 +185,17 @@ export const deleteAdvert = async(id) => {
 }
 
 export const deleteImage = async(url, id) => {
-
+    console.log(url, id);
     if (!tokenUpdateNew) {
         await refreshToken()
-     }
-    const response = await fetch(`${baseUrl}ads/${id}/image`,{
+    }
+
+    const fileUrlParam = encodeURIComponent(url);
+    const response = await fetch(`${baseUrl}ads/${id}/image?file_url=${fileUrlParam}`,{
         method: 'DELETE',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('refToken')}`,
         },
-        body: JSON.stringify({
-            "file_url": url,
-          }),
     })
     
     const data = await response.json()
