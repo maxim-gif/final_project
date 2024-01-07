@@ -9,7 +9,7 @@ return data
 }
 
 export const registration = async (email, password) => {
-    return fetch(`${baseUrl}auth/register`, {
+return fetch(`${baseUrl}auth/register`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
