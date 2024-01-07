@@ -59,6 +59,6 @@
         }
     },
     "lint-staged": {
-        "*": "prettier --write"
+        "*": ["npm run format"]
     }
 }
