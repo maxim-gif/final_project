@@ -13,6 +13,7 @@ export const Main = () => {
     const [productsHtml, setProductsHtml] = useState([])
 
     useEffect(() => {
+        console.log(productsState)
         getHtml(productsState)
     }, [productsState])
 
@@ -46,7 +47,11 @@ export const Main = () => {
     return (
         <>
             <S.Header>
-                <S.ButtonHeader onClick={() => navigate(`/profile`)}>
+                <S.ButtonHeader
+                    onClick={() => {
+                        navigate(`/profile`)
+                    }}
+                >
                     Вход в личный кабинет
                 </S.ButtonHeader>
             </S.Header>

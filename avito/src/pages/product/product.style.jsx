@@ -60,6 +60,7 @@ export const ProductCity = styled(ProductDate)`
 
 export const ProductReviews = styled(ProductDate)`
     color: #009ee4;
+    cursor: pointer;
 `
 
 export const ProductPrice = styled.h2`

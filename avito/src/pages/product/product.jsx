@@ -6,9 +6,11 @@ import { useSelector } from 'react-redux'
 import { ProfileHeader } from '../../components/profileHeader/profileHeader'
 import { ShowTelButton } from '../../components/showTelButton/showTelButton'
 import { formatToDate, formatDate } from '../../utilits/dateFormate'
-import { baseUrl, deleteAdvert } from '../../components/api/api'
+import { reviewsFormat } from '../../utilits/reviewsFormat'
+import { baseUrl, deleteAdvert, getReviews } from '../../components/api/api'
 import { AddAdvert } from '../../components/addAdvert/addAdvert'
 import { EditAdvert } from '../../components/editAdvert/editAdvert'
+import { ModalReviews } from '../../components/modalReviews/modalReviews'
 
 export const Product = () => {
     const products = useSelector((state) => state.products.products)
@@ -20,8 +22,10 @@ export const Product = () => {
 
     const [imagesHtml, setImagesHtml] = useState([])
     const [addModal, setAddModal] = useState(false)
+    const [reviewsModal, setReviewsModal] = useState(false)
     const [editModal, setEditModal] = useState(false)
     const [switchMainImage, setSwitchMainImage] = useState(0)
+    const [reviews, setReviews] = useState([])
 
     let dataAdvert = products.filter((product) => product.id === Number(id))
 
@@ -32,6 +36,16 @@ export const Product = () => {
     const handleEdit = () => {
         setEditModal(true)
     }
+
+    const handleGetReviews = () => {
+        setReviewsModal(true)
+    }
+
+    useEffect(() => {
+        getReviews(id).then((data) => {
+            setReviews(data)
+        })
+    }, [])
 
     useEffect(() => {
         if (dataAdvert.length > 0 && dataAdvert[0].images) {
@@ -46,10 +60,17 @@ export const Product = () => {
             ))
             setImagesHtml(result)
         }
-    }, [products, id])
+    }, [products])
 
     return dataAdvert.length > 0 ? (
         <>
+            <ModalReviews
+                reviewsModal={reviewsModal}
+                setReviewsModal={setReviewsModal}
+                reviews={reviews}
+                setReviews={setReviews}
+                id={id}
+            />
             <AddAdvert addModal={addModal} switchModal={setAddModal} />
             <EditAdvert
                 editModal={editModal}
@@ -75,7 +96,11 @@ export const Product = () => {
                         {formatToDate(dataAdvert[0].created_on)}
                     </S.ProductDate>
                     <S.ProductCity>{dataAdvert[0].user.city}</S.ProductCity>
-                    <S.ProductReviews>23 отзыва</S.ProductReviews>
+                    <S.ProductReviews onClick={handleGetReviews}>
+                        {reviews.length > 0
+                            ? reviewsFormat(reviews.length)
+                            : '0 отзывов'}
+                    </S.ProductReviews>
                     <S.ProductPrice>
                         {dataAdvert[0].price.toLocaleString()} ₽
                     </S.ProductPrice>

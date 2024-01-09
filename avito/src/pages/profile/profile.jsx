@@ -28,6 +28,7 @@ export const Profile = () => {
 
     const handleUserData = () => {
         getMyData().then((data) => {
+            console.log(data)
             setUser(data)
             setName(data.name || '')
             setSurname(data.surname || '')

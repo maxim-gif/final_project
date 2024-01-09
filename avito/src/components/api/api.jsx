@@ -3,13 +3,13 @@ export const baseUrl = 'http://localhost:8090/'
 let tokenUpdateNew = false
 
 export const getProducts = async () => {
-const response = await fetch(`${baseUrl}ads`)
-const data = await response.json()
-return data
+    const response = await fetch(`${baseUrl}ads`)
+    const data = await response.json()
+    return data
 }
 
 export const registration = async (email, password) => {
-return fetch(`${baseUrl}auth/register`, {
+    return fetch(`${baseUrl}auth/register`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
@@ -32,7 +32,6 @@ export const authorization = async (email, password) => {
             password: password,
         }),
     })
-    console.log(response)
     const data = await response.json()
     return data
 }
@@ -232,6 +231,40 @@ export const addAvatar = async (image) => {
             authorization: `Bearer ${localStorage.getItem('refToken')}`,
         },
         body: formData,
+    })
+
+    const data = await response.json()
+    return data
+}
+
+export const getReviews = async (id) => {
+    if (!tokenUpdateNew) {
+        await refreshToken()
+    }
+
+    const response = await fetch(`${baseUrl}ads/${id}/comments`, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('refToken')}`,
+        },
+    })
+
+    const data = await response.json()
+    return data
+}
+
+export const addReviews = async (id, text) => {
+    if (!tokenUpdateNew) {
+        await refreshToken()
+    }
+    const response = await fetch(`${baseUrl}ads/${id}/comments`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('refToken')}`,
+        },
+        body: JSON.stringify({
+            text: text,
+        }),
     })
 
     const data = await response.json()
