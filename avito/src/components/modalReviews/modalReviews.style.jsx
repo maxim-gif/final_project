@@ -43,9 +43,10 @@ export const Tittle = styled.h1`
 `
 
 export const NameSection = styled.h2`
+    font-family: 'Noto Sans', sans-serif;
     font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
+    font-weight: 600;
+    line-height: 32px;
     color: black;
     margin-bottom: 20px;
 `
@@ -111,20 +112,22 @@ export const ReviewMain = styled.div`
 `
 
 export const ReviewsName = styled.h1`
+    font-family: 'Noto Sans', sans-serif;
     font-size: 16px;
     font-weight: 600;
     line-height: 32px;
     color: black;
     & > span {
+        font-family: 'Noto Sans', sans-serif;
         font-weight: 400;
         color: #5f5f5f;
     }
 `
 
 export const ReviewText = styled(ReviewsName)`
+    font-family: 'Noto Sans', sans-serif;
     margin-top: 12px;
     & > p {
-        font-family: Noto Sans;
         font-weight: 400;
         line-height: 24px;
         color: #5f5f5f;

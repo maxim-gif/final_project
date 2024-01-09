@@ -1,6 +1,7 @@
 import * as S from './modalReviews.style'
 import PropTypes from 'prop-types'
 import { baseUrl, addReviews, getReviews } from '../api/api'
+import { formatReviewsDate } from '../../utilits/dateFormate'
 import React from 'react'
 const { useState, useEffect } = React
 
@@ -17,7 +18,7 @@ export const ModalReviews = ({
     useEffect(() => {
         text !== '' ? setActiveButton(false) : setActiveButton(true)
     }, [text])
-
+console.log(reviews);
     const handleAddReviews = () => {
         addReviews(Number(id), text).then(() => {
             getReviews(id).then((data) => {
@@ -63,7 +64,7 @@ export const ModalReviews = ({
                                   <S.ReviewMain>
                                       <S.ReviewsName>
                                           {review.author.name}{' '}
-                                          <span>{review.created_on}</span>
+                                          <span>{formatReviewsDate(review.created_on)}</span>
                                       </S.ReviewsName>
                                       <S.ReviewText>
                                           Комментарий <p>{review.text}</p>
