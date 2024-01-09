@@ -114,7 +114,13 @@ export const Product = () => {
                             </S.ButtonDelete>
                         </S.Buttons>
                     ) : (
-                        <ShowTelButton phone={dataAdvert[0].user.phone} />
+                        <ShowTelButton
+                            phone={
+                                dataAdvert[0].user.phone
+                                    ? dataAdvert[0].user.phone
+                                    : 'Телефон не указан'
+                            }
+                        />
                     )}
                     <S.ProductSeller>
                         <S.PhotoSeller

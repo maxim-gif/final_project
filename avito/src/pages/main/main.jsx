@@ -58,7 +58,13 @@ export const Main = () => {
             <S.SearchMain>
                 <S.LogMain src="/img/LogoMain.svg"></S.LogMain>
                 <S.Search
-                    onChange={(e) => setSearchText(e.target.value)}
+                    onChange={(e) =>
+                        setSearchText(
+                            e.target.value
+                                .replaceAll('<', '&lt;')
+                                .replaceAll('>', '&gt;'),
+                        )
+                    }
                     placeholder="Поиск по объявлениям"
                 ></S.Search>
                 <S.SearchHeader onClick={() => search(searchText)}>

@@ -27,7 +27,7 @@ export const EditAdvert = ({ switchModal, editModal, dataAdvert }) => {
     useEffect(() => {
         name !== dataAdvert.title ||
         description !== dataAdvert.description ||
-        price !== dataAdvert.price ||
+        price != dataAdvert.price ||
         images.length !== 0 ||
         forDelete.length !== 0
             ? setActiveButton(true)
@@ -151,13 +151,25 @@ export const EditAdvert = ({ switchModal, editModal, dataAdvert }) => {
                 <S.InputName
                     value={name}
                     placeholder="Введите название"
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) =>
+                        setName(
+                            e.target.value
+                                .replaceAll('<', '&lt;')
+                                .replaceAll('>', '&gt;'),
+                        )
+                    }
                 ></S.InputName>
                 <S.NameSection>Описание</S.NameSection>
                 <S.InputDescription
                     value={description}
                     placeholder="Введите описание"
-                    onChange={(e) => setDescription(e.target.value)}
+                    onChange={(e) =>
+                        setDescription(
+                            e.target.value
+                                .replaceAll('<', '&lt;')
+                                .replaceAll('>', '&gt;'),
+                        )
+                    }
                 ></S.InputDescription>
                 <S.NameSection>
                     Фотографии товара <span>не более 5 фотографий</span>
@@ -168,7 +180,13 @@ export const EditAdvert = ({ switchModal, editModal, dataAdvert }) => {
                     <S.InputPrice
                         type="number"
                         value={price}
-                        onChange={(e) => setPrice(e.target.value)}
+                        onChange={(e) =>
+                            setPrice(
+                                e.target.value
+                                    .replaceAll('<', '&lt;')
+                                    .replaceAll('>', '&gt;'),
+                            )
+                        }
                     ></S.InputPrice>
                 </S.BoxInput>
                 <S.ButtonModal

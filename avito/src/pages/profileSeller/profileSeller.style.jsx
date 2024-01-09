@@ -38,7 +38,7 @@ export const SellerName = styled.h3`
 `
 
 export const SellerCity = styled.h4`
-    font-family: 'Noto Sans', sans-serif;   
+    font-family: 'Noto Sans', sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 32px;

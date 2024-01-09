@@ -18,7 +18,7 @@ export const ModalReviews = ({
     useEffect(() => {
         text !== '' ? setActiveButton(false) : setActiveButton(true)
     }, [text])
-console.log(reviews);
+    console.log(reviews)
     const handleAddReviews = () => {
         addReviews(Number(id), text).then(() => {
             getReviews(id).then((data) => {
@@ -41,20 +41,30 @@ console.log(reviews);
                             }}
                         ></S.ButtonClose>
                     </S.Top>
-                    <S.NameSection>Добавить отзыв</S.NameSection>
-                    <S.InputName
-                        placeholder="Введите отзыв"
-                        value={text}
-                        onChange={(e) => setText(e.target.value)}
-                    ></S.InputName>
-                    <S.ButtonModal
-                        onClick={() => {
-                            handleAddReviews()
-                        }}
-                        disabled={activeButton}
-                    >
-                        Опубликовать
-                    </S.ButtonModal>
+                    {localStorage.getItem('refToken') ? (
+                        <>
+                            <S.NameSection>Добавить отзыв</S.NameSection>
+                            <S.InputName
+                                placeholder="Введите отзыв"
+                                value={text}
+                                onChange={(e) =>
+                                    setText(
+                                        e.target.value
+                                            .replaceAll('<', '&lt;')
+                                            .replaceAll('>', '&gt;'),
+                                    )
+                                }
+                            ></S.InputName>
+                            <S.ButtonModal
+                                onClick={() => {
+                                    handleAddReviews()
+                                }}
+                                disabled={activeButton}
+                            >
+                                Опубликовать
+                            </S.ButtonModal>
+                        </>
+                    ) : null}
                     {reviews.length > 0
                         ? reviews.map((review) => (
                               <S.Review key={review.id}>
@@ -64,7 +74,11 @@ console.log(reviews);
                                   <S.ReviewMain>
                                       <S.ReviewsName>
                                           {review.author.name}{' '}
-                                          <span>{formatReviewsDate(review.created_on)}</span>
+                                          <span>
+                                              {formatReviewsDate(
+                                                  review.created_on,
+                                              )}
+                                          </span>
                                       </S.ReviewsName>
                                       <S.ReviewText>
                                           Комментарий <p>{review.text}</p>

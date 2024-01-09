@@ -96,13 +96,25 @@ export const AddAdvert = ({ switchModal, addModal, handleMyAdvert }) => {
                 <S.InputName
                     value={name}
                     placeholder="Введите название"
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) =>
+                        setName(
+                            e.target.value
+                                .replaceAll('<', '&lt;')
+                                .replaceAll('>', '&gt;'),
+                        )
+                    }
                 ></S.InputName>
                 <S.NameSection>Описание</S.NameSection>
                 <S.InputDescription
                     value={description}
                     placeholder="Введите описание"
-                    onChange={(e) => setDescription(e.target.value)}
+                    onChange={(e) =>
+                        setDescription(
+                            e.target.value
+                                .replaceAll('<', '&lt;')
+                                .replaceAll('>', '&gt;'),
+                        )
+                    }
                 ></S.InputDescription>
                 <S.NameSection>
                     Фотографии товара <span>не более 5 фотографий</span>
@@ -113,7 +125,13 @@ export const AddAdvert = ({ switchModal, addModal, handleMyAdvert }) => {
                     <S.InputPrice
                         type="number"
                         value={price}
-                        onChange={(e) => setPrice(e.target.value)}
+                        onChange={(e) =>
+                            setPrice(
+                                e.target.value
+                                    .replaceAll('<', '&lt;')
+                                    .replaceAll('>', '&gt;'),
+                            )
+                        }
                     ></S.InputPrice>
                 </S.BoxInput>
                 <S.ButtonModal

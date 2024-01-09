@@ -8,32 +8,57 @@ export const getProducts = async () => {
     return data
 }
 
-export const registration = async (email, password) => {
-    return fetch(`${baseUrl}auth/register`, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password,
-        }),
-    })
+export const registration = async (email, password, name, surname, city) => {
+    try {
+        const response = await fetch(`${baseUrl}auth/register`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+                name: name,
+                surname: surname,
+                city: city,
+            }),
+        })
+
+        if (response.ok) {
+            const data = await response.json()
+            return { success: true, data: data }
+        } else {
+            const errorData = await response.json()
+            return errorData
+        }
+    } catch (error) {
+        return { success: false, status: 'NETWORK_ERROR', error: error.message }
+    }
 }
 
 export const authorization = async (email, password) => {
-    const response = await fetch(`${baseUrl}auth/login`, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password,
-        }),
-    })
-    const data = await response.json()
-    return data
+    try {
+        const response = await fetch(`${baseUrl}auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            }),
+        })
+
+        if (response.ok) {
+            const data = await response.json()
+            return data
+        } else {
+            const errorData = await response.json()
+            return errorData
+        }
+    } catch (error) {
+        return { success: false, status: 'NETWORK_ERROR', error: error.message }
+    }
 }
 
 export const refreshToken = async () => {
