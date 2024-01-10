@@ -18,7 +18,6 @@ export const ModalReviews = ({
     useEffect(() => {
         text !== '' ? setActiveButton(false) : setActiveButton(true)
     }, [text])
-    console.log(reviews)
     const handleAddReviews = () => {
         addReviews(Number(id), text).then(() => {
             getReviews(id).then((data) => {
@@ -69,7 +68,11 @@ export const ModalReviews = ({
                         ? reviews.map((review) => (
                               <S.Review key={review.id}>
                                   <S.ReviewsImage
-                                      src={baseUrl + review.author.avatar}
+                                      src={
+                                          review.author.avatar
+                                              ? baseUrl + review.author.avatar
+                                              : '/img/notImage.png'
+                                      }
                                   ></S.ReviewsImage>
                                   <S.ReviewMain>
                                       <S.ReviewsName>

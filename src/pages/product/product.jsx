@@ -124,7 +124,11 @@ export const Product = () => {
                     )}
                     <S.ProductSeller>
                         <S.PhotoSeller
-                            src={baseUrl + dataAdvert[0].user.avatar}
+                            src={
+                                dataAdvert[0].user.avatar
+                                    ? baseUrl + dataAdvert[0].user.avatar
+                                    : '/img/notImage.png'
+                            }
                         ></S.PhotoSeller>
                         <S.SellerInfo>
                             <S.SellerName
@@ -145,7 +149,9 @@ export const Product = () => {
             </S.Product>
             <S.Description>
                 <h2>Описание товара</h2>
-                <p>{dataAdvert[0].description}</p>
+                {dataAdvert[0].description ? (
+                    <p>{dataAdvert[0].description}</p>
+                ) : null}
             </S.Description>
         </>
     ) : null

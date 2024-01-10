@@ -28,7 +28,6 @@ export const Profile = () => {
 
     const handleUserData = () => {
         getMyData().then((data) => {
-            console.log(data)
             setUser(data)
             setName(data.name || '')
             setSurname(data.surname || '')
@@ -117,7 +116,13 @@ export const Profile = () => {
             <S.SectionName>Настройки профиля</S.SectionName>
             <S.Profile>
                 <S.ProfilePhoto>
-                    <S.Photo src={baseUrl + user.avatar}></S.Photo>
+                    <S.Photo
+                        src={
+                            user.avatar
+                                ? baseUrl + user.avatar
+                                : '/img/notImage.png'
+                        }
+                    ></S.Photo>
                     <label>
                         Заменить
                         <S.ChangePhoto

@@ -70,7 +70,7 @@ export const ProfileSeller = () => {
                             <ShowTelButton phone={user.phone} />
                         </S.ProfileData>
                     </S.Seller>
-                    <S.SectionName>Мои товары</S.SectionName>
+                    <S.SectionName>Товары продавца</S.SectionName>
                     <S.CardsBox>{productsHtml}</S.CardsBox>
                 </>
             )}

@@ -13,7 +13,6 @@ export const Main = () => {
     const [productsHtml, setProductsHtml] = useState([])
 
     useEffect(() => {
-        console.log(productsState)
         getHtml(productsState)
     }, [productsState])
 
