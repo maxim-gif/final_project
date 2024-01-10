@@ -4,9 +4,9 @@ import React from 'react'
 const { useState, useEffect } = React
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { getProducts } from '../api/api'
+import { getProducts } from '../../api/api'
 import { setProducts } from '../../store/slices/avito'
-import { createAdvert, addImage } from '../../components/api/api'
+import { createAdvert, addImage } from '../../api/api'
 
 export const AddAdvert = ({ switchModal, addModal, handleMyAdvert }) => {
     const dispatch = useDispatch()

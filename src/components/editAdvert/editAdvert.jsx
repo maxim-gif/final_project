@@ -3,14 +3,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 const { useState, useEffect } = React
 import { useDispatch } from 'react-redux'
-import { getProducts } from '../api/api'
+import { getProducts } from '../../api/api'
 import { setProducts } from '../../store/slices/avito'
-import {
-    editAdvert,
-    addImage,
-    baseUrl,
-    deleteImage,
-} from '../../components/api/api'
+import { editAdvert, addImage, baseUrl, deleteImage } from '../../api/api'
 
 export const EditAdvert = ({ switchModal, editModal, dataAdvert }) => {
     const dispatch = useDispatch()

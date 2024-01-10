@@ -9,7 +9,7 @@ import {
     updateUser,
     baseUrl,
     addAvatar,
-} from '../../components/api/api'
+} from '../../api/api'
 import { AddAdvert } from '../../components/addAdvert/addAdvert'
 import { CardProduct } from '../../components/cardProduct/cardProduct'
 

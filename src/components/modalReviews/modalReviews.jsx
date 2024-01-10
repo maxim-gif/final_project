@@ -1,6 +1,6 @@
 import * as S from './modalReviews.style'
 import PropTypes from 'prop-types'
-import { baseUrl, addReviews, getReviews } from '../api/api'
+import { baseUrl, addReviews, getReviews } from '../../api/api'
 import { formatReviewsDate } from '../../utilits/dateFormate'
 import React from 'react'
 const { useState, useEffect } = React
