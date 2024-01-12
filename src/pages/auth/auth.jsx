@@ -2,7 +2,7 @@ import * as S from './auth.style'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 const { useState, useEffect } = React
-import { authorization, getMyData } from '../../components/api/api'
+import { authorization, getMyData } from '../../api/api'
 
 export const Auth = () => {
     const navigate = useNavigate()

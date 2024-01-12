@@ -18,14 +18,16 @@ export const ModalReviews = ({
     useEffect(() => {
         text !== '' ? setActiveButton(false) : setActiveButton(true)
     }, [text])
-    const handleAddReviews = () => {
-        addReviews(Number(id), text).then(() => {
-            getReviews(id).then((data) => {
-                setReviews(data)
-            })
-            setText('')
-        })
+
+    const handleAddReviews = async () => {
+        const data = await addReviews(Number(id), text)
+        if (data) {
+            const reviewsData = await getReviews(id)
+            setReviews(reviewsData)
+        }
+        setText('')
     }
+
     return (
         <S.Page $activeModal={reviewsModal}>
             <S.Modal>

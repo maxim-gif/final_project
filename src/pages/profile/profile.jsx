@@ -61,12 +61,13 @@ export const Profile = () => {
         setProductsHtml(result)
     }
 
-    const handleUpdate = () => {
-        updateUser(name, surname, city, phone).then(() => {
+    const handleUpdate = async () => {
+        const data = await updateUser(name, surname, city, phone)
+        if (data) {
             handleUserData()
             handleMyAdvert()
-        })
-        setActiveButton(true)
+            setActiveButton(true)
+        }
     }
 
     const handleAvatarChange = (e) => {

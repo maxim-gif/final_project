@@ -2,7 +2,7 @@ import React from 'react'
 const { useEffect } = React
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { getProducts } from './components/api/api'
+import { getProducts } from './api/api'
 import { setProducts } from './store/slices/avito'
 import { Auth } from './pages/auth/auth'
 import { Main } from './pages/main/main'

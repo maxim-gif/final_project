@@ -1,7 +1,7 @@
 import * as S from './reg.style'
 import React from 'react'
 const { useState, useEffect } = React
-import { registration } from '../../components/api/api'
+import { registration } from '../../api/api'
 import { useNavigate } from 'react-router-dom'
 
 export const Reg = () => {

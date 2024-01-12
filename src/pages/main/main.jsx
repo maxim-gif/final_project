@@ -3,7 +3,7 @@ import React from 'react'
 const { useState, useEffect } = React
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { baseUrl } from '../../components/api/api'
+import { baseUrl } from '../../api/api'
 import { CardProduct } from '../../components/cardProduct/cardProduct'
 
 export const Main = () => {

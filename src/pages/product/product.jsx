@@ -29,8 +29,9 @@ export const Product = () => {
 
     let dataAdvert = products.filter((product) => product.id === Number(id))
 
-    const handleDelete = () => {
-        deleteAdvert(id).then(navigate(`/profile`))
+    const handleDelete = async () => {
+        await deleteAdvert(id)
+        navigate(`/profile`)
     }
 
     const handleEdit = () => {

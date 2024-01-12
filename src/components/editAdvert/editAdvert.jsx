@@ -29,8 +29,9 @@ export const EditAdvert = ({ switchModal, editModal, dataAdvert }) => {
             : setActiveButton(false)
     }, [name, description, price, images, forDelete])
 
-    const handleAddAdvert = () => {
-        editAdvert(name, description, price, dataAdvert.id).then((data) => {
+    const handleAddAdvert = async () => {
+        const data = await editAdvert(name, description, price, dataAdvert.id)
+        if (data) {
             if (images.length > 0) {
                 for (let index = 0; index < images.length; index++) {
                     addImage(data.id, images[index]).then(() => {
@@ -49,9 +50,7 @@ export const EditAdvert = ({ switchModal, editModal, dataAdvert }) => {
                     dispatch(setProducts(data))
                 })
             }
-
-            console.log(data.id)
-        })
+        }
     }
 
     const handleImageChange = (e) => {
